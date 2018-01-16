@@ -1,0 +1,2 @@
+# estatistica
+Statistic (learning python)
