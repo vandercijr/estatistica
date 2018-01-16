@@ -56,21 +56,18 @@ def calcularAmplitudeClasse(min, max, k): #apesar de ter sido definida no trabal
 	return math.ceil((max - min) / k)
 
 def calcularTotal(intervalos):
-{
 	fabs = 0
 	frelat = 0
 
 	for intervalo in intervalos:
 		fabs += intervalo['frequencia_absoluta']
 		frelat += intervalo['frequencia_relativa']
-	}
 
 	return {
 		'frequencia_absoluta'	:	fabs,
 		'frequencia_relativa'	:	frelat,
 		'frequencia_acumulada'	:	'-'
 	}
-}
 
 def calcularPontoMedio(max, min):#calcula o ponto medio em uma classe
 	return (max + min) / 2
@@ -79,11 +76,11 @@ def calcularMedia(intervalos):#calcula a media da distribuicao
 	n = 0
 	soma_xi_fi = 0
 
-	for intervalos in intervalos:
-		soma_xi_fi += calcularPontoMedio(
-					intervalo['limite_superior'],
-					intervalo['limite_inferior']
-				) * intervalo['frequencia_absoluta'] //SOMATORIO xi * fi
+	for intervalo in intervalos:
+		soma_xi_fi += calcularPontoMedio( \
+					intervalo['limite_superior'], \
+					intervalo['limite_inferior'] \
+				) * intervalo['frequencia_absoluta'] #SOMATORIO xi * fi
 
 		n += intervalo['frequencia_absoluta']
 
@@ -129,72 +126,60 @@ def calcularMediana(intervalos, _h):
 	posto_mediana = calcularPostoMediana(n)
 	posicao = encontrarPostoMediana(posto_mediana, intervalos)
 
-	return intervalos[posicao]['limite_inferior'] + 
-			(posto_mediana - intervalos[posicao-1]['frequencia_acumulada']) * 
-			_h / 
-			intervalos[posicao-1]['frequencia_absoluta']
+	return intervalos[posicao]['limite_inferior'] + \
+			(posto_mediana - intervalos[posicao-1]['frequencia_acumulada']) * \
+			_h / \
+			intervalos[posicao-1]['frequencia_absoluta']\
 
 def calcularDesvioPadrao(intervalos):
 	return math.sqrt(calcularVariancia(intervalos))
 
 def gerarOutput(lista, intervalos):
-{
 	total = calcularTotal(intervalos)
-	tamanho_lista = count(lista)
+	tamanho_lista = len(lista)
 	k = calcularSturges(tamanho_lista)
 	h = calcularAmplitudeClasse(lista[0], lista[tamanho_lista-1], k)
 
 	print('Intervalos | FA | FR(%) | FAC')
-	print('\n')
 
-	foreach (intervalos as intervalo) {
-		print(
-			intervalo['limite_inferior'] +
-			' |- ' +
-			intervalo['limite_superior'] +
-			' | ' +
-			intervalo['frequencia_absoluta'] +
-			' | ' +
-			intervalo['frequencia_relativa'] +
-			' | ' +
-			intervalo['frequencia_acumulada'] 
-		)
-		print('\n')
-	}
-	print(
-		'TOTAL    ' +
-		' | ' +
-		total['frequencia_absoluta'] +
-		' | ' +
-		total['frequencia_relativa'] +
-		' | ' +
-		total['frequencia_acumulada'] 
-	)
+	for intervalo in intervalos:
+		print(intervalo['limite_inferior'], end='')
+		print(' |- ', end='')
+		print(intervalo['limite_superior'], end='')
+		print(' | ', end='')
+		print(intervalo['frequencia_absoluta'], end='')
+		print(' | ', end='')
+		print('{0:.02f}'.format(intervalo['frequencia_relativa']), end='')
+		print(' | ', end='')
+		print(intervalo['frequencia_acumulada'])
+
+	print('TOTAL    ', end='')
+	print(' | ', end='')
+	print(total['frequencia_absoluta'], end='')
+	print(' | ', end='')
+	print(total['frequencia_relativa'], end='')
+	print(' | ', end='')
+	print(total['frequencia_acumulada'])
 	print('\n')
 
 	print('Estatística Descritiva')
+	print('\n')
 
 	print(
-		'Media: ' + calcularMedia(intervalos)
+		'Media: {0:.02f}'.format(calcularMedia(intervalos))
 	)
 
-	print('\n')
 	print(
-		'Variancia: ' + calcularVariancia(intervalos)
+		'Variancia: {0:.02f}'.format(calcularVariancia(intervalos))
 	)
 
-	print('\n')
 	print(
-		'Desvio Padrao: ' + calcularDesvioPadrao(intervalos)
+		'Desvio Padrao: {0:.02f}'.format(calcularDesvioPadrao(intervalos))
 	)
 
-	print('\n')
 	print(
-		'Mediana: ' + calcularMediana(intervalos, h)
+		'Mediana: {0:.02f}'.format(calcularMediana(intervalos, h))
 	)
-	print('\n')
-}
-
 
 def main():#funcao principal
 	arquivo = open('amostra.txt')
@@ -219,5 +204,7 @@ def main():#funcao principal
 	intervalos_vazio = construirArrayIntervalos(lista[0], k, h)
 
 	intervalos = calcularFrequencia(intervalos_vazio, lista)
+
+	gerarOutput(lista, intervalos)
 
 main()
