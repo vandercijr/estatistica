@@ -110,6 +110,9 @@ def calcularVariancia(intervalos):
 
 	return ((n * soma_a) - _b) / (n * (n - 1))
 
+def calcularPostoMediana(n):
+	return (n + 1) / 2
+
 def main():#funcao principal
 	arquivo = open('amostra.txt')
 
