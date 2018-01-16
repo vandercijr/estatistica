@@ -30,14 +30,14 @@ def construirArrayIntervalos(valor_minimo_inicial, k, h): #controi a lista com a
 
 def calcularFrequencia(intervalos, lista):
 	novo_intervalos = intervalos
-	tamanho_lista = len(lista);
-	frequencia_acumulada = 0;
+	tamanho_lista = len(lista)
+	frequencia_acumulada = 0
 
 	for intervalo in novo_intervalos:
-		frequencia_absoluta = 0;
+		frequencia_absoluta = 0
 		for item in lista:
 			if (item >= intervalo['limite_inferior'] and item < intervalo['limite_superior']):
-				frequencia_absoluta += 1;
+				frequencia_absoluta += 1
 			else:
 				if (intervalo['frequencia_absoluta'] > 0):
 					break
@@ -121,6 +121,18 @@ def encontrarPostoMediana(posto_mediana, intervalos):
 		posicao += 1
 
 	return posicao
+
+def calcularMediana(intervalos, _h):
+	total = calcularTotal(intervalos)
+	n = total['frequencia_absoluta']
+
+	posto_mediana = calcularPostoMediana(n)
+	posicao = encontrarPostoMediana(posto_mediana, intervalos)
+
+	return intervalos[posicao]['limite_inferior'] + 
+			(posto_mediana - intervalos[posicao-1]['frequencia_acumulada']) * 
+			_h / 
+			intervalos[posicao-1]['frequencia_absoluta']
 
 def main():#funcao principal
 	arquivo = open('amostra.txt')
