@@ -51,15 +51,15 @@ def calcularFrequencia(intervalos, lista):
 
 	return novo_intervalos
 
-def calcularAmplitudeClasse(limite_inferior, limite_superior, k): #apesar de ter sido definida no trabalho criei a funcao para facilitar os calculos
+def calcularAmplitudeClasse(min, max, k): #apesar de ter sido definida no trabalho criei a funcao para facilitar os calculos
 	#ceil arredonda uma fracao para um inteiro
-	return math.ceil((limite_superior - limite_inferior) / k)
+	return math.ceil((max - min) / k)
 
 def calcularTotal(intervalos):
 {
 	fabs = 0
 	frelat = 0
-	
+
 	for intervalo in intervalos:
 		fabs += intervalo['frequencia_absoluta']
 		frelat += intervalo['frequencia_relativa']
@@ -71,6 +71,9 @@ def calcularTotal(intervalos):
 		'frequencia_acumulada'	:	'-'
 	}
 }
+
+def calcularPontoMedio(max, min):#calcula o ponto medio em uma classe
+	return (max + min) / 2
 
 def main():
 	arquivo = open('amostra.txt')
