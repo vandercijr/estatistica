@@ -89,6 +89,27 @@ def calcularMedia(intervalos):#calcula a media da distribuicao
 
 	return soma_xi_fi / n
 
+def calcularVariancia(intervalos):
+	total = calcularTotal(intervalos)
+	n = total['frequencia_absoluta']
+
+	soma_a = 0
+	soma_b = 0
+
+	for intervalo in intervalos:
+		ponto_medio = calcularPontoMedio(
+			intervalo['limite_superior'],
+			intervalo['limite_inferior']
+		)
+
+		soma_a += math.pow(ponto_medio, 2) * intervalo['frequencia_absoluta']
+
+		soma_b += ponto_medio * intervalo['frequencia_absoluta']
+
+	_b = math.pow(soma_b, 2)
+
+	return ((n * soma_a) - _b) / (n * (n - 1))
+
 def main():#funcao principal
 	arquivo = open('amostra.txt')
 
