@@ -28,11 +28,55 @@ def construirArrayIntervalos(valor_minimo_inicial, k, h): #controi a lista com a
 
 	return intervalos
 
-def calcularAmplitudeClasse(min, max, k): #apesar de ter sido definida no trabalho criei a funcao para facilitar os calculos
+def calcularFrequencia(intervalos, lista):
+	novo_intervalos = intervalos
+	tamanho_lista = len(lista);
+	frequencia_acumulada = 0;
+
+	for intervalo in novo_intervalos:
+		frequencia_absoluta = 0;
+		for item in lista:
+			if (item >= intervalo['limite_inferior'] and item < intervalo['limite_superior']):
+				frequencia_absoluta += 1;
+			else:
+				if (intervalo['frequencia_absoluta'] > 0):
+					break
+
+		frequencia_acumulada += frequencia_absoluta
+		frequencia_relativa = frequencia_absoluta / tamanho_lista * 100
+
+		novo_intervalos[novo_intervalos.index(intervalo)]['frequencia_absoluta'] = frequencia_absoluta
+		novo_intervalos[novo_intervalos.index(intervalo)]['frequencia_relativa'] = frequencia_relativa
+		novo_intervalos[novo_intervalos.index(intervalo)]['frequencia_acumulada'] = frequencia_acumulada
+
+	return novo_intervalos
+
+def calcularAmplitudeClasse(limite_inferior, limite_superior, k): #apesar de ter sido definida no trabalho criei a funcao para facilitar os calculos
 	#ceil arredonda uma fracao para um inteiro
-	return math.ceil((max - min) / k)
+	return math.ceil((limite_superior - limite_inferior) / k)
 
 def main():
-	print(calcularAmplitudeClasse(33, 97, 7))
+	arquivo = open('amostra.txt')
+
+	lista = []
+
+	for linha in arquivo:
+		lista.append(
+			int(
+				linha.rstrip('\n')
+			)
+		)
+	
+	arquivo.close()
+
+	tamanho_lista = len(lista)
+
+	k = calcularSturges(tamanho_lista) #numero de classes pela regra de sturges
+
+	h = calcularAmplitudeClasse(lista[0], lista[tamanho_lista-1], k)
+
+	intervalos_vazio = construirArrayIntervalos(lista[0], k, h)
+
+	intervalos = calcularFrequencia(intervalos_vazio, lista)
 
 main()
