@@ -28,11 +28,11 @@ def construirArrayIntervalos(valor_minimo_inicial, k, h): #controi a lista com a
 
 	return intervalos
 
-def main():
-	print(calcularSturges(50))
-	print('\n');
-	a = construirArrayIntervalos(33, calcularSturges(50), 10)
+def calcularAmplitudeClasse(min, max, k): #apesar de ter sido definida no trabalho criei a funcao para facilitar os calculos
+	#ceil arredonda uma fracao para um inteiro
+	return math.ceil((max - min) / k)
 
-	print(a[0]['limite_inferior'])
+def main():
+	print(calcularAmplitudeClasse(33, 97, 7))
 
 main()
