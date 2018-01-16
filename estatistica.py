@@ -113,6 +113,15 @@ def calcularVariancia(intervalos):
 def calcularPostoMediana(n):
 	return (n + 1) / 2
 
+def encontrarPostoMediana(posto_mediana, intervalos):
+	posicao = 0
+	for intervalo in intervalos:
+		if (posto_mediana <= intervalo['frequencia_acumulada']):
+			break
+		posicao += 1
+
+	return posicao
+
 def main():#funcao principal
 	arquivo = open('amostra.txt')
 
