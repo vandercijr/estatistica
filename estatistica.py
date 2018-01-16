@@ -137,6 +137,64 @@ def calcularMediana(intervalos, _h):
 def calcularDesvioPadrao(intervalos):
 	return math.sqrt(calcularVariancia(intervalos))
 
+def gerarOutput(lista, intervalos):
+{
+	total = calcularTotal(intervalos)
+	tamanho_lista = count(lista)
+	k = calcularSturges(tamanho_lista)
+	h = calcularAmplitudeClasse(lista[0], lista[tamanho_lista-1], k)
+
+	print('Intervalos | FA | FR(%) | FAC')
+	print('\n')
+
+	foreach (intervalos as intervalo) {
+		print(
+			intervalo['limite_inferior'] +
+			' |- ' +
+			intervalo['limite_superior'] +
+			' | ' +
+			intervalo['frequencia_absoluta'] +
+			' | ' +
+			intervalo['frequencia_relativa'] +
+			' | ' +
+			intervalo['frequencia_acumulada'] 
+		)
+		print('\n')
+	}
+	print(
+		'TOTAL    ' +
+		' | ' +
+		total['frequencia_absoluta'] +
+		' | ' +
+		total['frequencia_relativa'] +
+		' | ' +
+		total['frequencia_acumulada'] 
+	)
+	print('\n')
+
+	print('Estatística Descritiva')
+
+	print(
+		'Media: ' + calcularMedia(intervalos)
+	)
+
+	print('\n')
+	print(
+		'Variancia: ' + calcularVariancia(intervalos)
+	)
+
+	print('\n')
+	print(
+		'Desvio Padrao: ' + calcularDesvioPadrao(intervalos)
+	)
+
+	print('\n')
+	print(
+		'Mediana: ' + calcularMediana(intervalos, h)
+	)
+	print('\n')
+}
+
 
 def main():#funcao principal
 	arquivo = open('amostra.txt')
