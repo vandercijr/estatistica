@@ -75,7 +75,21 @@ def calcularTotal(intervalos):
 def calcularPontoMedio(max, min):#calcula o ponto medio em uma classe
 	return (max + min) / 2
 
-def main():
+def calcularMedia(intervalos):#calcula a media da distribuicao
+	n = 0
+	soma_xi_fi = 0
+
+	for intervalos in intervalos:
+		soma_xi_fi += calcularPontoMedio(
+					intervalo['limite_superior'],
+					intervalo['limite_inferior']
+				) * intervalo['frequencia_absoluta'] //SOMATORIO xi * fi
+
+		n += intervalo['frequencia_absoluta']
+
+	return soma_xi_fi / n
+
+def main():#funcao principal
 	arquivo = open('amostra.txt')
 
 	lista = []
