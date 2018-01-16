@@ -1,4 +1,7 @@
-import math
+import math #importa a lib com as funcoes matematicas basicas (arredondar, potencia, etc)
+
+#ceil arredonda uma fração para cima
+#pow efetua um calculo exponencial pow(x, y)  x elevado a y
 
 def calcularSturges(n):
 	#retorna a variavel k que representa o numero de classes da distribuicao
@@ -70,7 +73,7 @@ def calcularTotal(intervalos):
 	}
 
 def calcularPontoMedio(max, min):#calcula o ponto medio em uma classe
-	return (max + min) / 2
+	return (max + min) / 2 #ponto medio é a media dos limites inferior e superior da classe
 
 def calcularMedia(intervalos):#calcula a media da distribuicao
 	n = 0
