@@ -134,6 +134,10 @@ def calcularMediana(intervalos, _h):
 			_h / 
 			intervalos[posicao-1]['frequencia_absoluta']
 
+def calcularDesvioPadrao(intervalos):
+	return math.sqrt(calcularVariancia(intervalos))
+
+
 def main():#funcao principal
 	arquivo = open('amostra.txt')
 
