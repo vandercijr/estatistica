@@ -55,6 +55,23 @@ def calcularAmplitudeClasse(limite_inferior, limite_superior, k): #apesar de ter
 	#ceil arredonda uma fracao para um inteiro
 	return math.ceil((limite_superior - limite_inferior) / k)
 
+def calcularTotal(intervalos):
+{
+	fabs = 0
+	frelat = 0
+	
+	for intervalo in intervalos:
+		fabs += intervalo['frequencia_absoluta']
+		frelat += intervalo['frequencia_relativa']
+	}
+
+	return {
+		'frequencia_absoluta'	:	fabs,
+		'frequencia_relativa'	:	frelat,
+		'frequencia_acumulada'	:	'-'
+	}
+}
+
 def main():
 	arquivo = open('amostra.txt')
 
